@@ -56,7 +56,12 @@ Protected Session (Low latency, zero frame drops)
   - Browser-style multi-process tree protection
   - Three-class taxonomy (`PROTECTED`, `NORMAL`, `BACKGROUND`)
   - Strict allowlist & never-touch policy enforcement
-- [ ] **Phase 4: Cgroups v2 Manager (Creation, Migration, Restoration)**
+- [x] **Phase 4: Cgroups v2 Manager (Creation, Migration, Restoration)**
+  - `protector.slice` hierarchy (`protected`, `background`, `normal`)
+  - Dynamic shaping: `cpu.weight`, `io.weight`, `memory.high`
+  - PID migration tracking with original cgroup recording
+  - Complete restoration of processes to original cgroups upon cleanup
+  - Strict `--dry-run` default with transparent action audit logs
 - [ ] **Phase 5: Resource Shaper State Machine (Fairness & Aging)**
 - [ ] **Phase 6: Multi-Threaded Daemon Engine (Monitor + Shaper)**
 - [ ] **Phase 7: Fake Video Call Benchmark App (30 FPS metric collector)**

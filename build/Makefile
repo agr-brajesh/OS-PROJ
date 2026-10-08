@@ -178,6 +178,30 @@ unit_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/build
 .PHONY : unit_tests/fast
 
+src/cgroup_manager.o: src/cgroup_manager.cpp.o
+.PHONY : src/cgroup_manager.o
+
+# target to build an object file
+src/cgroup_manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/cgroup_manager.cpp.o
+.PHONY : src/cgroup_manager.cpp.o
+
+src/cgroup_manager.i: src/cgroup_manager.cpp.i
+.PHONY : src/cgroup_manager.i
+
+# target to preprocess a source file
+src/cgroup_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/cgroup_manager.cpp.i
+.PHONY : src/cgroup_manager.cpp.i
+
+src/cgroup_manager.s: src/cgroup_manager.cpp.s
+.PHONY : src/cgroup_manager.s
+
+# target to generate assembly for a file
+src/cgroup_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/cgroup_manager.cpp.s
+.PHONY : src/cgroup_manager.cpp.s
+
 src/config.o: src/config.cpp.o
 .PHONY : src/config.o
 
@@ -322,6 +346,30 @@ src/session_detector.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/session_detector.cpp.s
 .PHONY : src/session_detector.cpp.s
 
+tests/test_cgroup_manager.o: tests/test_cgroup_manager.cpp.o
+.PHONY : tests/test_cgroup_manager.o
+
+# target to build an object file
+tests/test_cgroup_manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_cgroup_manager.cpp.o
+.PHONY : tests/test_cgroup_manager.cpp.o
+
+tests/test_cgroup_manager.i: tests/test_cgroup_manager.cpp.i
+.PHONY : tests/test_cgroup_manager.i
+
+# target to preprocess a source file
+tests/test_cgroup_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_cgroup_manager.cpp.i
+.PHONY : tests/test_cgroup_manager.cpp.i
+
+tests/test_cgroup_manager.s: tests/test_cgroup_manager.cpp.s
+.PHONY : tests/test_cgroup_manager.s
+
+# target to generate assembly for a file
+tests/test_cgroup_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_cgroup_manager.cpp.s
+.PHONY : tests/test_cgroup_manager.cpp.s
+
 tests/test_config.o: tests/test_config.cpp.o
 .PHONY : tests/test_config.o
 
@@ -431,6 +479,9 @@ help:
 	@echo "... isp_core"
 	@echo "... protector"
 	@echo "... unit_tests"
+	@echo "... src/cgroup_manager.o"
+	@echo "... src/cgroup_manager.i"
+	@echo "... src/cgroup_manager.s"
 	@echo "... src/config.o"
 	@echo "... src/config.i"
 	@echo "... src/config.s"
@@ -449,6 +500,9 @@ help:
 	@echo "... src/session_detector.o"
 	@echo "... src/session_detector.i"
 	@echo "... src/session_detector.s"
+	@echo "... tests/test_cgroup_manager.o"
+	@echo "... tests/test_cgroup_manager.i"
+	@echo "... tests/test_cgroup_manager.s"
 	@echo "... tests/test_config.o"
 	@echo "... tests/test_config.i"
 	@echo "... tests/test_config.s"

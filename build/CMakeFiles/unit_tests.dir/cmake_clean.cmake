@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/unit_tests.dir/tests/test_cgroup_manager.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/test_cgroup_manager.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_config.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/test_config.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o"

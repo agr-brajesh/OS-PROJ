@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/cgroup_manager.cpp" "CMakeFiles/isp_core.dir/src/cgroup_manager.cpp.o" "gcc" "CMakeFiles/isp_core.dir/src/cgroup_manager.cpp.o.d"
   "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/config.cpp" "CMakeFiles/isp_core.dir/src/config.cpp.o" "gcc" "CMakeFiles/isp_core.dir/src/config.cpp.o.d"
   "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/logger.cpp" "CMakeFiles/isp_core.dir/src/logger.cpp.o" "gcc" "CMakeFiles/isp_core.dir/src/logger.cpp.o.d"
   "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/proc_table.cpp" "CMakeFiles/isp_core.dir/src/proc_table.cpp.o" "gcc" "CMakeFiles/isp_core.dir/src/proc_table.cpp.o.d"

@@ -5,6 +5,7 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/protector_main.cpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/config.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/logger.hpp
+ /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/proc_table.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/session_detector.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/types.hpp
  /usr/include/alloca.h
@@ -109,6 +110,7 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /usr/include/c++/13/limits
  /usr/include/c++/13/mutex
  /usr/include/c++/13/new
+ /usr/include/c++/13/optional
  /usr/include/c++/13/ostream
  /usr/include/c++/13/pstl/pstl_config.h
  /usr/include/c++/13/ratio

@@ -4,6 +4,7 @@
 CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/src/protector_main.cpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/config.hpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/logger.hpp \
+  /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/proc_table.hpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/session_detector.hpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/types.hpp \
   /usr/include/alloca.h \
@@ -108,6 +109,7 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
   /usr/include/c++/13/limits \
   /usr/include/c++/13/mutex \
   /usr/include/c++/13/new \
+  /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
@@ -340,13 +342,19 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/pthread.h:
 
-/usr/include/c++/13/debug/debug.h:
+/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
-/usr/include/c++/13/stdexcept:
+/usr/include/linux/errno.h:
+
+/usr/include/features.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/c++/13/bits/refwrap.h:
+
+/usr/include/c++/13/debug/debug.h:
+
+/usr/include/c++/13/stdexcept:
 
 /usr/include/c++/13/bits/node_handle.h:
 
@@ -382,13 +390,15 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/asm-generic/errno-base.h:
 
+/usr/include/c++/13/new:
+
+/usr/include/c++/13/ext/alloc_traits.h:
+
 /usr/include/c++/13/bits/locale_facets.tcc:
 
 /usr/include/c++/13/bits/requires_hosted.h:
 
 /usr/include/c++/13/bits/string_view.tcc:
-
-/usr/include/features.h:
 
 /usr/include/c++/13/backward/binders.h:
 
@@ -399,16 +409,6 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/c++/13/iosfwd:
 
 /usr/include/c++/13/cwchar:
-
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-
-/usr/include/c++/13/bits/basic_ios.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
-
-/usr/include/c++/13/bits/basic_ios.tcc:
-
-/usr/include/c++/13/bits/nested_exception.h:
 
 /usr/include/alloca.h:
 
@@ -424,25 +424,25 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/c++/13/type_traits:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/usr/include/c++/13/bits/chrono.h:
 
-/usr/include/c++/13/bits/hashtable_policy.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
 /usr/include/c++/13/bits/char_traits.h:
 
-/usr/include/c++/13/bits/chrono.h:
+/usr/include/c++/13/bits/hashtable_policy.h:
 
 /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/session_detector.hpp:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/usr/include/c++/13/bits/exception_ptr.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
 
 /usr/include/c++/13/bits/ptr_traits.h:
+
+/usr/include/c++/13/bits/alloc_traits.h:
+
+/usr/include/c++/13/bits/concept_check.h:
 
 /usr/include/c++/13/bits/ostream_insert.h:
 
@@ -460,6 +460,16 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/logger.hpp:
 
+/usr/include/c++/13/bits/nested_exception.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
+
+/usr/include/c++/13/bits/basic_ios.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/c++/13/bits/basic_ios.h:
+
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/c++/13/bits/basic_string.h:
@@ -474,9 +484,9 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
-/usr/include/c++/13/bits/stl_pair.h:
-
 /usr/include/c++/13/bits/charconv.h:
+
+/usr/include/c++/13/bits/stl_pair.h:
 
 /usr/include/c++/13/cstdio:
 
@@ -503,14 +513,6 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/c++/13/cstddef:
 
 /usr/include/c++/13/vector:
-
-/usr/include/c++/13/bits/concept_check.h:
-
-/usr/include/c++/13/bits/alloc_traits.h:
-
-/usr/include/c++/13/new:
-
-/usr/include/c++/13/ext/alloc_traits.h:
 
 /usr/include/c++/13/bits/stl_algobase.h:
 
@@ -541,6 +543,12 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/c++/13/bits/unordered_map.h:
 
 /usr/include/c++/13/bits/stl_vector.h:
+
+/usr/include/c++/13/bits/istream.tcc:
+
+/usr/include/c++/13/bits/exception_ptr.h:
+
+/usr/include/c++/13/optional:
 
 /usr/include/c++/13/bits/std_abs.h:
 
@@ -648,6 +656,8 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/c++/13/bits/cxxabi_init_exception.h:
 
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/proc_table.hpp:
+
 /usr/include/c++/13/typeinfo:
 
 /usr/include/c++/13/unordered_map:
@@ -655,7 +665,3 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/c++/13/bits/streambuf.tcc:
 
 /usr/include/endian.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/linux/errno.h:
