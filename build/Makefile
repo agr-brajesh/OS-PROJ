@@ -250,6 +250,30 @@ src/daemon.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/daemon.cpp.s
 .PHONY : src/daemon.cpp.s
 
+src/fake_call.o: src/fake_call.cpp.o
+.PHONY : src/fake_call.o
+
+# target to build an object file
+src/fake_call.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/fake_call.cpp.o
+.PHONY : src/fake_call.cpp.o
+
+src/fake_call.i: src/fake_call.cpp.i
+.PHONY : src/fake_call.i
+
+# target to preprocess a source file
+src/fake_call.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/fake_call.cpp.i
+.PHONY : src/fake_call.cpp.i
+
+src/fake_call.s: src/fake_call.cpp.s
+.PHONY : src/fake_call.s
+
+# target to generate assembly for a file
+src/fake_call.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/fake_call.cpp.s
+.PHONY : src/fake_call.cpp.s
+
 src/fake_call_main.o: src/fake_call_main.cpp.o
 .PHONY : src/fake_call_main.o
 
@@ -490,6 +514,30 @@ tests/test_daemon.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_daemon.cpp.s
 .PHONY : tests/test_daemon.cpp.s
 
+tests/test_fake_call.o: tests/test_fake_call.cpp.o
+.PHONY : tests/test_fake_call.o
+
+# target to build an object file
+tests/test_fake_call.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_fake_call.cpp.o
+.PHONY : tests/test_fake_call.cpp.o
+
+tests/test_fake_call.i: tests/test_fake_call.cpp.i
+.PHONY : tests/test_fake_call.i
+
+# target to preprocess a source file
+tests/test_fake_call.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_fake_call.cpp.i
+.PHONY : tests/test_fake_call.cpp.i
+
+tests/test_fake_call.s: tests/test_fake_call.cpp.s
+.PHONY : tests/test_fake_call.s
+
+# target to generate assembly for a file
+tests/test_fake_call.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_fake_call.cpp.s
+.PHONY : tests/test_fake_call.cpp.s
+
 tests/test_main.o: tests/test_main.cpp.o
 .PHONY : tests/test_main.o
 
@@ -608,6 +656,9 @@ help:
 	@echo "... src/daemon.o"
 	@echo "... src/daemon.i"
 	@echo "... src/daemon.s"
+	@echo "... src/fake_call.o"
+	@echo "... src/fake_call.i"
+	@echo "... src/fake_call.s"
 	@echo "... src/fake_call_main.o"
 	@echo "... src/fake_call_main.i"
 	@echo "... src/fake_call_main.s"
@@ -638,6 +689,9 @@ help:
 	@echo "... tests/test_daemon.o"
 	@echo "... tests/test_daemon.i"
 	@echo "... tests/test_daemon.s"
+	@echo "... tests/test_fake_call.o"
+	@echo "... tests/test_fake_call.i"
+	@echo "... tests/test_fake_call.s"
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"

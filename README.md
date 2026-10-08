@@ -77,8 +77,20 @@ Protected Session (Low latency, zero frame drops)
   - POSIX signal handling (`SIGINT`, `SIGTERM`, `SIGHUP`)
   - Graceful lifecycle teardown and total cgroup process restoration
   - Validated end-to-end with concurrent `fake_call` and `stress-ng`
-- [ ] **Phase 7: Fake Video Call Benchmark App (30 FPS metric collector)**
-- [ ] **Phase 8: Benchmarking & Quantitative Evaluation Suite**
+- [x] **Phase 7: Fake Video Call Benchmark App (30 FPS metric collector)**
+  - C++17 modular video workload holding `/dev/video10` descriptor open
+  - High-precision drift-free 30 FPS pacing using `std::this_thread::sleep_until`
+  - V4L2 device capability query and non-blocking read integration
+  - Per-frame timestamp recording, interval measurement, and deadline miss detection
+  - CSV export with `timestamp,frame_number,frame_interval_ms,deadline_missed,jitter_ms`
+  - Validated ~1800 frames over 60 seconds with active session detection
+- [x] **Phase 8: Benchmarking & Quantitative Evaluation Suite**
+  - Automated experiment runner ([`scripts/run_experiments.py`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/scripts/run_experiments.py)) and shell wrapper ([`scripts/run_experiments.sh`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/scripts/run_experiments.sh))
+  - Side-by-side comparison between **MODE A (Baseline - Protector Disabled)** and **MODE B (Protected - Protector Enabled)**
+  - Fixed-size concurrent background workloads: `stress-ng` CPU bogo-ops, `tar` dataset compression, `dd` direct I/O
+  - Metrics collected: frame drops, interval distributions (P50/P95/P99), jitter, and background job completion times
+  - Comprehensive CSV exports: per-frame raw CSVs, per-run summaries, master `results/experiment_summary.csv`, and JSON metadata
+  - Automated visualization: summary bar charts and cumulative distribution function (CDF) plots in `results/plots/`
 - [ ] **Phase 9: Hardening, Sanitizers & Final Documentation**
 
 ---

@@ -1,0 +1,20 @@
+[32m[2026-10-08 20:02:49.466] [INFO ] [fake_call.cpp:51] [0mFakeCallApp: Successfully opened /dev/video10 (fd: 3). Descriptor held open for session.
+[32m[2026-10-08 20:02:49.468] [INFO ] [fake_call.cpp:169] [0mFakeCallApp: Starting session (60s @ 30 FPS). Target frame interval: 33.3333ms (deadline limit: 40ms, expected frames: 1800)...
+[32m[2026-10-08 20:03:54.593] [INFO ] [fake_call.cpp:231] [0mFakeCallApp: Session completed. Recorded 1800 frames with 7 deadline misses (0.388889%).
+[32m[2026-10-08 20:03:54.624] [INFO ] [fake_call.cpp:256] [0mFakeCallApp: Exported 1800 frame metrics to /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/results/raw/protected_rep1_frames.csv
+
+=======================================================
+       Fake Video Call Metrics Summary
+=======================================================
+  Total Frames Recorded  : 1800
+  Target FPS             : 30
+  Target Interval        : 33.3333 ms
+  Deadline Misses (drops): 7 (0.388889%)
+  Mean Frame Interval    : 33.3336 ms
+  Min Frame Interval     : 23.3513 ms
+  Max Frame Interval     : 44.4825 ms
+  P95 Frame Interval     : 34.6239 ms
+  P99 Frame Interval     : 37.876 ms
+=======================================================
+
+[32m[2026-10-08 20:03:54.631] [INFO ] [fake_call.cpp:91] [0mFakeCallApp: Closed webcam device /dev/video10

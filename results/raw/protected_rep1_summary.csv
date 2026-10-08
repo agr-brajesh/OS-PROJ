@@ -1,0 +1,2 @@
+mode,repetition,target_fps,duration_sec,total_frames,deadline_misses,miss_rate_pct,mean_interval_ms,min_interval_ms,max_interval_ms,p50_interval_ms,p95_interval_ms,p99_interval_ms,mean_jitter_ms,max_jitter_ms,stress_cpu_runtime_sec,tar_runtime_sec,dd_runtime_sec,device,deadline_tolerance
+protected,1,30.0,60,1800,7,0.389,33.334,23.351,44.483,33.33,34.624,37.876,0.469,11.149,23.749,0.745,0.342,/dev/video10,1.2

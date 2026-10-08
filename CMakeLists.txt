@@ -29,6 +29,7 @@ add_library(isp_core STATIC
     src/ioprio.cpp
     src/resource_shaper.cpp
     src/daemon.cpp
+    src/fake_call.cpp
 )
 
 target_include_directories(isp_core PUBLIC
@@ -65,6 +66,7 @@ add_executable(unit_tests
     tests/test_cgroup_manager.cpp
     tests/test_resource_shaper.cpp
     tests/test_daemon.cpp
+    tests/test_fake_call.cpp
 )
 target_include_directories(unit_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/tests

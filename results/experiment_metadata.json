@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-10-08T20:04:00Z",
+  "configuration": {
+    "duration_sec": 60,
+    "repetitions": 1,
+    "modes": "baseline,protected",
+    "fps": 30.0,
+    "device": "/dev/video10",
+    "tolerance": 1.2,
+    "cpu_ops": 300000,
+    "stress_cpus": 18,
+    "tar_size_mb": 50,
+    "dd_blocks": 150,
+    "poll_interval_ms": 200
+  },
+  "environment": {
+    "sysname": "Linux",
+    "release": "6.18.33.1-microsoft-standard-WSL2",
+    "machine": "x86_64",
+    "cpu_cores": 18
+  },
+  "summary_records": [
+    {
+      "mode": "baseline",
+      "repetition": 1,
+      "target_fps": 30.0,
+      "duration_sec": 60,
+      "total_frames": 1800,
+      "deadline_misses": 8,
+      "miss_rate_pct": 0.444,
+      "mean_interval_ms": 33.333,
+      "min_interval_ms": 9.747,
+      "max_interval_ms": 56.767,
+      "p50_interval_ms": 33.334,
+      "p95_interval_ms": 34.352,
+      "p99_interval_ms": 37.471,
+      "mean_jitter_ms": 0.463,
+      "max_jitter_ms": 23.587,
+      "stress_cpu_runtime_sec": 22.479,
+      "tar_runtime_sec": 0.751,
+      "dd_runtime_sec": 0.445,
+      "device": "/dev/video10",
+      "deadline_tolerance": 1.2
+    },
+    {
+      "mode": "protected",
+      "repetition": 1,
+      "target_fps": 30.0,
+      "duration_sec": 60,
+      "total_frames": 1800,
+      "deadline_misses": 7,
+      "miss_rate_pct": 0.389,
+      "mean_interval_ms": 33.334,
+      "min_interval_ms": 23.351,
+      "max_interval_ms": 44.483,
+      "p50_interval_ms": 33.33,
+      "p95_interval_ms": 34.624,
+      "p99_interval_ms": 37.876,
+      "mean_jitter_ms": 0.469,
+      "max_jitter_ms": 11.149,
+      "stress_cpu_runtime_sec": 23.749,
+      "tar_runtime_sec": 0.745,
+      "dd_runtime_sec": 0.342,
+      "device": "/dev/video10",
+      "deadline_tolerance": 1.2
+    }
+  ]
+}

@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unit_tests.dir/tests/test_config.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_daemon.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/test_daemon.cpp.o.d"
+  "CMakeFiles/unit_tests.dir/tests/test_fake_call.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/test_fake_call.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.o"

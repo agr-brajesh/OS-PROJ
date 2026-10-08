@@ -1,30 +1,43 @@
+#include "fake_call.hpp"
 #include "logger.hpp"
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <chrono>
-#include <thread>
-#include <fstream>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstring>
+#include <csignal>
+#include <atomic>
+
+namespace {
+std::atomic<isp::FakeCallApp*> g_app_instance{nullptr};
+
+void handle_signal(int sig) {
+    (void)sig;
+    isp::FakeCallApp* app = g_app_instance.load();
+    if (app) {
+        app->stop();
+    }
+}
+} // namespace
 
 void print_usage(const char* prog_name) {
     std::cout << "Usage: " << prog_name << " [options]\n\n"
               << "Options:\n"
-              << "  -d, --device <dev>    Path to webcam device (default: /dev/video10)\n"
-              << "  -f, --fps <val>       Target frames per second (default: 30)\n"
-              << "  -t, --duration <sec>  Run duration in seconds (default: 10)\n"
-              << "  -o, --output <file>   Path to output CSV metrics file\n"
-              << "  -h, --help            Show this help message and exit\n";
+              << "  -d, --device <dev>      Path to webcam device (default: /dev/video10)\n"
+              << "  -f, --fps <val>         Target frames per second (default: 30.0)\n"
+              << "  -t, --duration <sec>    Run duration in seconds (default: 60)\n"
+              << "  -o, --output <file>     Path to output CSV metrics file (default: fake_call_metrics.csv)\n"
+              << "      --tolerance <ratio> Deadline miss tolerance ratio (default: 1.2)\n"
+              << "      --no-cpu-load       Disable simulated video encode CPU workload\n"
+              << "  -h, --help              Show this help message and exit\n";
 }
 
 int main(int argc, char* argv[]) {
-    std::string device = "/dev/video10";
-    int fps = 30;
-    int duration_sec = 10;
-    std::string output_csv = "";
+    isp::FakeCallConfig config;
+    config.device = "/dev/video10";
+    config.target_fps = 30.0;
+    config.duration_sec = 60;
+    config.output_csv = "fake_call_metrics.csv";
+    config.deadline_tolerance_ratio = 1.2;
+    config.simulate_cpu_load = true;
 
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
@@ -33,23 +46,44 @@ int main(int argc, char* argv[]) {
             return 0;
         } else if (arg == "-d" || arg == "--device") {
             if (i + 1 < argc) {
-                device = argv[++i];
+                config.device = argv[++i];
             } else {
                 std::cerr << "Error: --device requires a device path\n";
                 return 1;
             }
         } else if (arg == "-f" || arg == "--fps") {
             if (i + 1 < argc) {
-                fps = std::stoi(argv[++i]);
+                try {
+                    config.target_fps = std::stod(argv[++i]);
+                } catch (...) {
+                    std::cerr << "Error: Invalid FPS value\n";
+                    return 1;
+                }
             }
         } else if (arg == "-t" || arg == "--duration") {
             if (i + 1 < argc) {
-                duration_sec = std::stoi(argv[++i]);
+                try {
+                    config.duration_sec = static_cast<uint32_t>(std::stoul(argv[++i]));
+                } catch (...) {
+                    std::cerr << "Error: Invalid duration value\n";
+                    return 1;
+                }
             }
         } else if (arg == "-o" || arg == "--output") {
             if (i + 1 < argc) {
-                output_csv = argv[++i];
+                config.output_csv = argv[++i];
             }
+        } else if (arg == "--tolerance") {
+            if (i + 1 < argc) {
+                try {
+                    config.deadline_tolerance_ratio = std::stod(argv[++i]);
+                } catch (...) {
+                    std::cerr << "Error: Invalid tolerance ratio\n";
+                    return 1;
+                }
+            }
+        } else if (arg == "--no-cpu-load") {
+            config.simulate_cpu_load = false;
         } else {
             std::cerr << "Unknown option: " << arg << "\n";
             print_usage(argv[0]);
@@ -57,45 +91,15 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    ISP_LOG_INFO("Fake Video Call starting session:");
-    ISP_LOG_INFO("  device:   " << device);
-    ISP_LOG_INFO("  fps:      " << fps);
-    ISP_LOG_INFO("  duration: " << duration_sec << "s");
+    isp::FakeCallApp app(config);
+    g_app_instance.store(&app);
 
-    // Open video device and hold descriptor open for entire session
-    int fd = open(device.c_str(), O_RDWR);
-    if (fd < 0) {
-        fd = open(device.c_str(), O_RDONLY);
-    }
+    std::signal(SIGINT, handle_signal);
+    std::signal(SIGTERM, handle_signal);
 
-    if (fd >= 0) {
-        ISP_LOG_INFO("Opened device " << device << " (fd: " << fd << "). Session active.");
-    } else {
-        ISP_LOG_WARN("Could not open " << device << ": " << strerror(errno));
-    }
+    app.run();
+    app.print_summary();
 
-    auto start_time = std::chrono::steady_clock::now();
-    auto end_time = start_time + std::chrono::seconds(duration_sec);
-    double frame_interval_ms = 1000.0 / static_cast<double>(fps);
-
-    int total_frames = 0;
-    auto next_frame = start_time;
-
-    while (std::chrono::steady_clock::now() < end_time) {
-        next_frame += std::chrono::duration_cast<std::chrono::steady_clock::duration>(
-            std::chrono::duration<double, std::milli>(frame_interval_ms));
-        
-        ++total_frames;
-
-        // Sleep until next frame boundary
-        std::this_thread::sleep_until(next_frame);
-    }
-
-    if (fd >= 0) {
-        close(fd);
-        ISP_LOG_INFO("Closed device " << device << ". Session ended.");
-    }
-
-    ISP_LOG_INFO("Fake Video Call session completed (" << total_frames << " frames processed).");
+    g_app_instance.store(nullptr);
     return 0;
 }

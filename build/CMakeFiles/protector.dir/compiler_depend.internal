@@ -4,19 +4,27 @@
 CMakeFiles/protector.dir/src/protector_main.cpp.o
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/protector_main.cpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/cgroup_manager.hpp
+ /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/clock.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/config.hpp
+ /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/daemon.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/logger.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/proc_table.hpp
+ /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/resource_shaper.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/session_detector.hpp
  /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/include/types.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h
+ /usr/include/c++/13/atomic
+ /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
+ /usr/include/c++/13/bits/align.h
  /usr/include/c++/13/bits/alloc_traits.h
  /usr/include/c++/13/bits/allocated_ptr.h
  /usr/include/c++/13/bits/allocator.h
+ /usr/include/c++/13/bits/atomic_base.h
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h
  /usr/include/c++/13/bits/basic_ios.h
  /usr/include/c++/13/bits/basic_ios.tcc
  /usr/include/c++/13/bits/basic_string.h
@@ -71,10 +79,12 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /usr/include/c++/13/bits/refwrap.h
  /usr/include/c++/13/bits/requires_hosted.h
  /usr/include/c++/13/bits/shared_ptr.h
+ /usr/include/c++/13/bits/shared_ptr_atomic.h
  /usr/include/c++/13/bits/shared_ptr_base.h
  /usr/include/c++/13/bits/sstream.tcc
  /usr/include/c++/13/bits/std_abs.h
  /usr/include/c++/13/bits/std_mutex.h
+ /usr/include/c++/13/bits/std_thread.h
  /usr/include/c++/13/bits/stl_algobase.h
  /usr/include/c++/13/bits/stl_bvector.h
  /usr/include/c++/13/bits/stl_construct.h
@@ -83,12 +93,15 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /usr/include/c++/13/bits/stl_iterator_base_funcs.h
  /usr/include/c++/13/bits/stl_iterator_base_types.h
  /usr/include/c++/13/bits/stl_pair.h
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h
+ /usr/include/c++/13/bits/stl_tempbuf.h
  /usr/include/c++/13/bits/stl_uninitialized.h
  /usr/include/c++/13/bits/stl_vector.h
  /usr/include/c++/13/bits/streambuf.tcc
  /usr/include/c++/13/bits/streambuf_iterator.h
  /usr/include/c++/13/bits/string_view.tcc
  /usr/include/c++/13/bits/stringfwd.h
+ /usr/include/c++/13/bits/this_thread_sleep.h
  /usr/include/c++/13/bits/unique_lock.h
  /usr/include/c++/13/bits/unique_ptr.h
  /usr/include/c++/13/bits/unordered_map.h
@@ -101,6 +114,7 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /usr/include/c++/13/chrono
  /usr/include/c++/13/clocale
  /usr/include/c++/13/codecvt
+ /usr/include/c++/13/condition_variable
  /usr/include/c++/13/cstddef
  /usr/include/c++/13/cstdint
  /usr/include/c++/13/cstdio
@@ -127,10 +141,13 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /usr/include/c++/13/istream
  /usr/include/c++/13/limits
  /usr/include/c++/13/locale
+ /usr/include/c++/13/memory
  /usr/include/c++/13/mutex
  /usr/include/c++/13/new
  /usr/include/c++/13/optional
  /usr/include/c++/13/ostream
+ /usr/include/c++/13/pstl/execution_defs.h
+ /usr/include/c++/13/pstl/glue_memory_defs.h
  /usr/include/c++/13/pstl/pstl_config.h
  /usr/include/c++/13/ratio
  /usr/include/c++/13/sstream
@@ -139,6 +156,7 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o
  /usr/include/c++/13/string
  /usr/include/c++/13/string_view
  /usr/include/c++/13/system_error
+ /usr/include/c++/13/thread
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo

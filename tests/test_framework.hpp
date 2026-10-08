@@ -102,3 +102,12 @@ public:
         throw test::AssertionFailure(_oss.str()); \
     } \
 } while(0)
+
+#define ASSERT_NEAR(a, b, eps) do { \
+    if (std::abs((a) - (b)) > (eps)) { \
+        std::ostringstream _oss; \
+        _oss << "Assertion failed: |" #a " - " #b "| <= " #eps " [|" << (a) << " - " << (b) << "| = " << std::abs((a) - (b)) << " > " << (eps) << "] at " << __FILE__ << ":" << __LINE__; \
+        throw test::AssertionFailure(_oss.str()); \
+    } \
+} while(0)
+
