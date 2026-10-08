@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/unit_tests.dir/tests/test_main.cpp.o CMakeFiles/unit_tests.dir/tests/test_config.cpp.o -o unit_tests  libisp_core.a 

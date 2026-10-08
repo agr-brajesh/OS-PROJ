@@ -1,0 +1,75 @@
+#include "config.hpp"
+#include "logger.hpp"
+#include "types.hpp"
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+void print_usage(const char* prog_name) {
+    std::cout << "Usage: " << prog_name << " [options]\n\n"
+              << "Options:\n"
+              << "  -c, --config <file>   Path to configuration file\n"
+              << "  -d, --dry-run         Run in dry-run mode (no actual cgroup modifications)\n"
+              << "  -v, --verbose         Enable debug-level logging\n"
+              << "  -h, --help            Show this help message and exit\n";
+}
+
+int main(int argc, char* argv[]) {
+    std::string config_file = "config/protector.conf";
+    bool cli_dry_run = false;
+    bool verbose = false;
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "-h" || arg == "--help") {
+            print_usage(argv[0]);
+            return 0;
+        } else if (arg == "-c" || arg == "--config") {
+            if (i + 1 < argc) {
+                config_file = argv[++i];
+            } else {
+                std::cerr << "Error: --config requires a file argument\n";
+                return 1;
+            }
+        } else if (arg == "-d" || arg == "--dry-run") {
+            cli_dry_run = true;
+        } else if (arg == "-v" || arg == "--verbose") {
+            verbose = true;
+        } else {
+            std::cerr << "Unknown option: " << arg << "\n";
+            print_usage(argv[0]);
+            return 1;
+        }
+    }
+
+    if (verbose) {
+        isp::Logger::instance().set_level(isp::LogLevel::DEBUG);
+    }
+
+    ISP_LOG_INFO("Interactive Session Protector daemon initializing...");
+
+    isp::Config config;
+    if (config.load_from_file(config_file)) {
+        ISP_LOG_INFO("Loaded configuration from: " << config_file);
+    } else {
+        ISP_LOG_WARN("Could not read configuration from " << config_file << ", using defaults");
+    }
+
+    if (cli_dry_run) {
+        config.set("dry_run", "true");
+    }
+
+    isp::ResourcePolicy policy = config.to_resource_policy();
+
+    ISP_LOG_INFO("Configuration loaded:");
+    ISP_LOG_INFO("  video_device: " << policy.video_device);
+    ISP_LOG_INFO("  cgroup_mount: " << policy.cgroup_mount);
+    ISP_LOG_INFO("  proc_mount:   " << policy.proc_mount);
+    ISP_LOG_INFO("  poll_ms:      " << policy.poll_interval_ms);
+    ISP_LOG_INFO("  hysteresis:   " << policy.hysteresis_delay_sec << "s");
+    ISP_LOG_INFO("  dry_run:      " << (policy.dry_run ? "true" : "false"));
+    ISP_LOG_INFO("Interactive Session Protector skeleton initialized successfully.");
+
+    return 0;
+}

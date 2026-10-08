@@ -1,0 +1,40 @@
+Start testing: Oct 08 18:57 UTC
+----------------------------------------------------------
+1/1 Testing: ConfigUnitTests
+1/1 Test: ConfigUnitTests
+Command: "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/unit_tests"
+Directory: /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build
+"ConfigUnitTests" start time: Oct 08 18:57 UTC
+Output:
+----------------------------------------------------------
+[1;34m=== Running Unit Tests (7 tests) ===[0m
+
+  [ RUN      ] Config_BasicKeyValueParsing
+  [0;32m[       OK ][0m Config_BasicKeyValueParsing
+  [ RUN      ] Config_CommentsAndEmptyLines
+  [0;32m[       OK ][0m Config_CommentsAndEmptyLines
+  [ RUN      ] Config_TypeConversions
+  [0;32m[       OK ][0m Config_TypeConversions
+  [ RUN      ] Config_DefaultFallbacks
+  [0;32m[       OK ][0m Config_DefaultFallbacks
+  [ RUN      ] Config_SetAndHas
+  [0;32m[       OK ][0m Config_SetAndHas
+  [ RUN      ] Config_ToResourcePolicy
+  [0;32m[       OK ][0m Config_ToResourcePolicy
+  [ RUN      ] Config_LoadFromFile
+[33m[2026-10-08 18:57:17.628] [WARN ] [config.cpp:68] [0mUnable to open config file: non_existent_file_xyz.conf
+  [0;32m[       OK ][0m Config_LoadFromFile
+
+[1m=== Test Summary ===[0m
+  Total:  7
+  [0;32mPassed: 7[0m
+  [0;32mAll tests passed successfully![0m
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"ConfigUnitTests" end time: Oct 08 18:57 UTC
+"ConfigUnitTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 08 18:57 UTC

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/fake_call.dir/src/fake_call_main.cpp.o -o fake_call  libisp_core.a 
