@@ -1,5 +1,6 @@
 #include "proc_table.hpp"
 #include "session_detector.hpp"
+#include "cgroup_manager.hpp"
 #include "logger.hpp"
 
 #include <filesystem>
@@ -53,8 +54,21 @@ bool ProcTable::refresh(const std::string& procRoot, const std::string& videoDev
 
             if (pid > 0) {
                 active_pids.insert(pid);
+
+                uint64_t current_start = CgroupManager::get_process_starttime(pid, procRoot);
+
+                auto existing_it = entries_.find(pid);
+                if (existing_it != entries_.end() && existing_it->second.start_time != 0 &&
+                    current_start != 0 && existing_it->second.start_time != current_start) {
+                    ISP_LOG_WARN("ProcTable: detected recycled PID " << pid
+                                 << " (start_time changed from " << existing_it->second.start_time
+                                 << " to " << current_start << "). Resetting entry.");
+                    entries_.erase(existing_it);
+                }
+
                 ProcEntry& entry = entries_[pid];
                 entry.pid = pid;
+                entry.start_time = current_start;
                 entry.last_seen = now;
 
                 // Process name from comm

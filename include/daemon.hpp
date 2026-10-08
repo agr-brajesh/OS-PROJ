@@ -30,10 +30,12 @@ public:
     // Lifecycle
     bool start();
     void stop();
-    void wait();
+    bool wait(int timeout_sec = 0);
 
-    // Signal handler entry
+    // Signal handling
     static void handle_signal(int signum);
+    static int get_last_signal();
+    static void reset_signal();
 
     // Status queries
     bool is_running() const { return running_.load(); }

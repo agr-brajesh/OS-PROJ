@@ -94,8 +94,7 @@ int main(int argc, char* argv[]) {
 
     if (timeout_sec > 0) {
         ISP_LOG_INFO("Running in timed mode for " << timeout_sec << " seconds...");
-        std::this_thread::sleep_for(std::chrono::seconds(timeout_sec));
-        daemon.stop();
+        daemon.wait(timeout_sec);
     } else {
         // Run indefinitely until signal
         daemon.wait();

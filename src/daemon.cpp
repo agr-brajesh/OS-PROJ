@@ -11,13 +11,20 @@
 
 namespace isp {
 
+static std::atomic<int> g_signal_received{0};
 static std::atomic<ProtectorDaemon*> g_daemon_instance{nullptr};
 
 void ProtectorDaemon::handle_signal(int signum) {
-    ISP_LOG_INFO("Caught termination signal (" << signum << "). Initiating graceful daemon shutdown...");
-    if (auto* daemon = g_daemon_instance.load()) {
-        daemon->stop();
-    }
+    // Pure async-signal-safe atomic store
+    g_signal_received.store(signum);
+}
+
+int ProtectorDaemon::get_last_signal() {
+    return g_signal_received.load();
+}
+
+void ProtectorDaemon::reset_signal() {
+    g_signal_received.store(0);
 }
 
 ProtectorDaemon::ProtectorDaemon(ResourcePolicy policy,
@@ -82,10 +89,15 @@ bool ProtectorDaemon::start() {
     }
 
     // Register signal handlers
+    reset_signal();
     g_daemon_instance.store(this);
     std::signal(SIGINT, ProtectorDaemon::handle_signal);
     std::signal(SIGTERM, ProtectorDaemon::handle_signal);
     std::signal(SIGHUP, ProtectorDaemon::handle_signal);
+
+    // Hardening: Clean up any stale cgroup slices or stranded PIDs from past crashes
+    ISP_LOG_INFO("Checking for and cleaning up any stale cgroups from prior runs...");
+    cgroup_mgr_.cleanup_stale_hierarchy();
 
     ISP_LOG_INFO("Initializing cgroup hierarchy (mode: "
                  << (policy_.dry_run ? "DRY-RUN" : "ACTIVE") << ")...");
@@ -135,13 +147,36 @@ void ProtectorDaemon::stop() {
     ISP_LOG_INFO("Protector daemon shutdown complete.");
 }
 
-void ProtectorDaemon::wait() {
+bool ProtectorDaemon::wait(int timeout_sec) {
+    auto start_time = std::chrono::steady_clock::now();
+    while (running_.load()) {
+        int sig = g_signal_received.load();
+        if (sig != 0) {
+            ISP_LOG_INFO("Caught termination signal (" << sig << "). Initiating graceful daemon shutdown...");
+            stop();
+            return false;
+        }
+
+        if (timeout_sec > 0) {
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
+                std::chrono::steady_clock::now() - start_time).count();
+            if (elapsed >= timeout_sec) {
+                ISP_LOG_INFO("Daemon timeout reached (" << timeout_sec << "s). Stopping...");
+                stop();
+                return true;
+            }
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+
     if (monitor_thread_.joinable()) {
         monitor_thread_.join();
     }
     if (shaper_thread_.joinable()) {
         shaper_thread_.join();
     }
+    return true;
 }
 
 void ProtectorDaemon::monitor_loop() {

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <algorithm>
 #include <unistd.h>
+#include <csignal>
 
 namespace fs = std::filesystem;
 
@@ -132,7 +133,58 @@ bool CgroupManager::write_file(const fs::path& file_path, const std::string& con
     return true;
 }
 
+bool CgroupManager::cleanup_stale_hierarchy() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    fs::path slice_path = fs::path(cgroup_root_) / SLICE_NAME;
+    std::error_code ec;
+
+    if (!fs::exists(slice_path, ec)) {
+        return true;
+    }
+
+    ISP_LOG_INFO("CgroupManager: Found existing slice " << slice_path.string() << ". Cleaning up stale state...");
+    fs::path root_procs = fs::path(cgroup_root_) / "cgroup.procs";
+
+    // Evacuate processes from known child cgroups
+    std::vector<std::string> groups = {GROUP_PROTECTED, GROUP_BACKGROUND, GROUP_NORMAL};
+    for (const auto& grp : groups) {
+        fs::path grp_path = slice_path / grp;
+        fs::path procs_file = grp_path / "cgroup.procs";
+        if (fs::exists(procs_file, ec)) {
+            std::ifstream in(procs_file);
+            std::string pid_str;
+            while (in >> pid_str) {
+                if (!pid_str.empty()) {
+                    if (dry_run_) {
+                        log_action("[DRY-RUN] Evacuate stale PID " + pid_str + " from " + grp_path.string() + " to root cgroup");
+                    } else {
+                        std::ofstream out(root_procs, std::ios_base::app);
+                        if (out.is_open()) {
+                            out << pid_str << "\n";
+                        }
+                    }
+                }
+            }
+        }
+        remove_dir(grp_path);
+    }
+
+    // Remove any other unknown subdirectories inside protector.slice
+    for (const auto& entry : fs::directory_iterator(slice_path, fs::directory_options::skip_permission_denied, ec)) {
+        if (entry.is_directory()) {
+            remove_dir(entry.path());
+        }
+    }
+
+    remove_dir(slice_path);
+    ISP_LOG_INFO("CgroupManager: Stale cgroup cleanup completed.");
+    return true;
+}
+
 bool CgroupManager::init_hierarchy() {
+    // Evacuate and wipe any preexisting stale hierarchy before initializing
+    cleanup_stale_hierarchy();
+
     std::lock_guard<std::mutex> lock(mutex_);
     fs::path slice_path = fs::path(cgroup_root_) / SLICE_NAME;
 
@@ -225,16 +277,26 @@ bool CgroupManager::move_process(pid_t pid,
                                 const std::string& hint_original_cgroup) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    // 1. Record original cgroup if not already tracked
+    // PID validation: ensure process exists (enforced on real cgroup or custom proc root)
+    if (!dry_run_ && (cgroup_root_ == "/sys/fs/cgroup" || proc_root_ != "/proc")) {
+        if (!is_process_alive(pid)) {
+            ISP_LOG_WARN("CgroupManager: PID " << pid << " is not alive; skipping migration to " << target_group);
+            return false;
+        }
+    }
+
+    uint64_t start_time = get_process_starttime(pid, proc_root_);
+
+    // 1. Record original cgroup and start time if not already tracked
     if (original_cgroups_.find(pid) == original_cgroups_.end()) {
         std::string orig_cg = hint_original_cgroup;
         if (orig_cg.empty() || orig_cg == "/") {
             orig_cg = read_process_cgroup(pid);
         }
-        original_cgroups_[pid] = orig_cg;
+        original_cgroups_[pid] = TrackedProcess{orig_cg, start_time};
     }
 
-    std::string orig = original_cgroups_[pid];
+    std::string orig = original_cgroups_[pid].original_cgroup;
     fs::path target_procs = fs::path(get_group_path(target_group)) / "cgroup.procs";
 
     if (dry_run_) {
@@ -265,7 +327,24 @@ bool CgroupManager::restore_process(pid_t pid) {
         return true; // Not tracked
     }
 
-    std::string orig_cg = it->second;
+    std::string orig_cg = it->second.original_cgroup;
+    uint64_t recorded_start_time = it->second.start_time;
+
+    // PID reuse validation: check if process still alive and is the same process
+    if (!dry_run_ && (cgroup_root_ == "/sys/fs/cgroup" || proc_root_ != "/proc")) {
+        if (!is_process_alive(pid)) {
+            // Process terminated, safe to discard without migration
+            original_cgroups_.erase(it);
+            return true;
+        }
+        uint64_t current_start_time = get_process_starttime(pid, proc_root_);
+        if (recorded_start_time > 0 && current_start_time > 0 && recorded_start_time != current_start_time) {
+            ISP_LOG_WARN("CgroupManager: PID " << pid << " was reused by a new process (start time mismatch). Skipping restoration.");
+            original_cgroups_.erase(it);
+            return true;
+        }
+    }
+
     // Format path to original cgroup.procs
     fs::path orig_rel = orig_cg;
     if (!orig_rel.empty() && orig_rel.string().front() == '/') {
@@ -335,7 +414,59 @@ void CgroupManager::clear_action_log() {
 
 std::unordered_map<pid_t, std::string> CgroupManager::get_tracked_migrations() const {
     std::lock_guard<std::mutex> lock(mutex_);
-    return original_cgroups_;
+    std::unordered_map<pid_t, std::string> result;
+    for (const auto& [pid, info] : original_cgroups_) {
+        result[pid] = info.original_cgroup;
+    }
+    return result;
+}
+
+bool CgroupManager::is_process_alive(pid_t pid, const std::string& proc_root) {
+    if (pid <= 0) return false;
+    std::error_code ec;
+    fs::path p = fs::path(proc_root) / std::to_string(pid);
+    if (fs::exists(p, ec)) {
+        return true;
+    }
+    if (kill(pid, 0) == 0 || errno == EPERM) {
+        return true;
+    }
+    return false;
+}
+
+bool CgroupManager::is_process_alive(pid_t pid) const {
+    return is_process_alive(pid, proc_root_);
+}
+
+uint64_t CgroupManager::get_process_starttime(pid_t pid, const std::string& proc_root) {
+    if (pid <= 0) return 0;
+    fs::path stat_path = fs::path(proc_root) / std::to_string(pid) / "stat";
+    std::ifstream file(stat_path);
+    if (!file.is_open()) {
+        return 0;
+    }
+    std::string line;
+    if (!std::getline(file, line)) {
+        return 0;
+    }
+    size_t last_paren = line.rfind(')');
+    if (last_paren == std::string::npos || last_paren + 2 >= line.size()) {
+        return 0;
+    }
+    std::string after = line.substr(last_paren + 2);
+    std::istringstream iss(after);
+    std::string token;
+    // Token 0: state, Token 1: ppid, ..., Token 19: starttime
+    for (int i = 0; i < 19; ++i) {
+        if (!(iss >> token)) {
+            return 0;
+        }
+    }
+    uint64_t starttime = 0;
+    if (iss >> starttime) {
+        return starttime;
+    }
+    return 0;
 }
 
 uint64_t CgroupManager::get_total_ram_bytes() const {

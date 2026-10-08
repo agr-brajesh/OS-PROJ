@@ -1,0 +1,7 @@
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/isp_core.dir
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/protector.dir
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/fake_call.dir
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/unit_tests.dir
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/test.dir
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/edit_cache.dir
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build_tsan/CMakeFiles/rebuild_cache.dir

@@ -204,6 +204,13 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Enable AddressSanitizer (ASan) and UndefinedBehaviorSanitizer
+// (UBSan)
+ENABLE_ASAN:BOOL=OFF
+
+//Enable ThreadSanitizer (TSan)
+ENABLE_TSAN:BOOL=OFF
+
 //Value Computed by CMake
 interactive_session_protector_BINARY_DIR:STATIC=/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build
 

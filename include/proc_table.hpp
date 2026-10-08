@@ -20,6 +20,7 @@ struct ProcEntry {
     ProcessClass classification{ProcessClass::NORMAL};
     bool holds_video_device{false};
     bool allowlisted{false};
+    uint64_t start_time{0};
     std::vector<pid_t> children;
     std::chrono::steady_clock::time_point last_seen{std::chrono::steady_clock::now()};
 };

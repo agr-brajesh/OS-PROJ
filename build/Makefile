@@ -538,6 +538,30 @@ tests/test_fake_call.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_fake_call.cpp.s
 .PHONY : tests/test_fake_call.cpp.s
 
+tests/test_hardening.o: tests/test_hardening.cpp.o
+.PHONY : tests/test_hardening.o
+
+# target to build an object file
+tests/test_hardening.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_hardening.cpp.o
+.PHONY : tests/test_hardening.cpp.o
+
+tests/test_hardening.i: tests/test_hardening.cpp.i
+.PHONY : tests/test_hardening.i
+
+# target to preprocess a source file
+tests/test_hardening.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_hardening.cpp.i
+.PHONY : tests/test_hardening.cpp.i
+
+tests/test_hardening.s: tests/test_hardening.cpp.s
+.PHONY : tests/test_hardening.s
+
+# target to generate assembly for a file
+tests/test_hardening.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_hardening.cpp.s
+.PHONY : tests/test_hardening.cpp.s
+
 tests/test_main.o: tests/test_main.cpp.o
 .PHONY : tests/test_main.o
 
@@ -692,6 +716,9 @@ help:
 	@echo "... tests/test_fake_call.o"
 	@echo "... tests/test_fake_call.i"
 	@echo "... tests/test_fake_call.s"
+	@echo "... tests/test_hardening.o"
+	@echo "... tests/test_hardening.i"
+	@echo "... tests/test_hardening.s"
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"

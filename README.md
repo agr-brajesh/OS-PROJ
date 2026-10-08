@@ -1,48 +1,47 @@
 # Interactive Session Protector
 
-An Operating Systems project designed to protect latency-sensitive interactive sessions (such as video calls, online classes, telemedicine, or interviews) from resource starvation caused by heavy background workloads (compilation, compression, batch I/O, CPU stress).
+An Operating Systems daemon designed to protect latency-sensitive interactive sessions (such as video calls, online classes, telemedicine, or live interviews) from resource starvation caused by heavy concurrent background workloads (compilation, compression, batch direct-I/O, CPU stress).
 
 ---
 
 ## Architecture Overview
 
 ```
-Linux Processes
+Linux Processes (/proc)
       │
       ▼
 Session Detector (monitors open descriptors for /dev/video*)
       │
       ▼
-Process Classifier (Allowlist + rule-based classification)
+Process Classifier (Tree-walking + Allowlist + Rule-based classification)
       │
       ▼
-Cgroup v2 Manager (manages hierarchy & migrations)
+Cgroup v2 Manager (manages protector.slice hierarchy, migrations, restoration)
       │
       ▼
 Resource Shaper (dynamic CPU weight, IO weight, memory.high, IO priority)
       ├── Starvation Floor (prevents total stall of background jobs)
-      ├── Aging (+10 weight every 15s)
-      ├── Aging Ceiling (caps background weight)
-      └── Hysteresis (delays restoration to handle intermittent drops)
+      ├── Dynamic Aging (+10 weight every 15s)
+      ├── Aging Ceiling (caps background allocation)
+      └── Hysteresis (grace countdown to suppress camera reconnect flapping)
       │
       ▼
-Protected Session (Low latency, zero frame drops)
+Protected Session (Low latency, 0% frame deadline misses)
    + Background Workloads (Smooth progress without starvation)
 ```
 
 ---
 
-## Phase Status
+## Implementation Status (Phases 0 — 11 Complete)
 
 - [x] **Phase 0: Environment Setup & Verification**
-  - Ubuntu Linux environment verified
-  - C++17 (`g++` with `-Wall -Wextra`) & CMake
+  - Ubuntu Linux environment verified (WSL2 / native Linux)
+  - C++17 (`g++` with `-Wall -Wextra -Wpedantic`) & CMake
   - `cgroups v2` unified hierarchy with `cpu`, `io`, and `memory` controllers
-  - Webcam test device (`/dev/video10`)
-  - Stress workloads (`stress-ng`, `tar`, `dd`) & Python analysis suite
+  - Video capture test device (`/dev/video10`) & fallback node generator
+  - Synthetic stress workloads (`stress-ng`, `tar`, `dd`) & Python analysis suite
 - [x] **Phase 1: Build & Foundation (CMake, CLI, Logging)**
   - Clean modular architecture (`include/`, `src/`, `tests/`)
-  - CMake C++17 build with `-Wall -Wextra -Wpedantic`
   - Targets: `protector`, `fake_call`, `unit_tests`
   - Zero-dependency key=value configuration parser
 - [x] **Phase 2: Session Detection (`/dev/video*` procfs scanner)**
@@ -91,35 +90,155 @@ Protected Session (Low latency, zero frame drops)
   - Metrics collected: frame drops, interval distributions (P50/P95/P99), jitter, and background job completion times
   - Comprehensive CSV exports: per-frame raw CSVs, per-run summaries, master `results/experiment_summary.csv`, and JSON metadata
   - Automated visualization: summary bar charts and cumulative distribution function (CDF) plots in `results/plots/`
-- [ ] **Phase 9: Hardening, Sanitizers & Final Documentation**
+- [x] **Phase 9: Data Analysis & Visualization Suite**
+  - Python analysis engine ([`scripts/analyze_experiments.py`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/scripts/analyze_experiments.py)) and shell wrapper ([`scripts/analyze_experiments.sh`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/scripts/analyze_experiments.sh))
+  - Metric computation: frame drop rate, mean, P95, P99, max latency spikes, and background job slowdown ratios
+  - Automated plot generation:
+    - [`results/plots/baseline_vs_protected_frame_drops.png`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/results/plots/baseline_vs_protected_frame_drops.png): Frame-drop rate and total miss count comparison
+    - [`results/plots/baseline_vs_protected_p99_latency.png`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/results/plots/baseline_vs_protected_p99_latency.png): P99 latency and peak tail-latency spike suppression
+  - Publication-ready summary tables exported to markdown ([`results/analysis_summary_table.md`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/results/analysis_summary_table.md)) and CSV ([`results/analysis_summary_table.csv`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/results/analysis_summary_table.csv))
+  - Robust parser handling missing, corrupt, or malformed CSV rows with unit test validation ([`tests/test_data_analysis.py`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/tests/test_data_analysis.py))
+- [x] **Phase 10: Hardening and Safety**
+  - **AddressSanitizer (ASan) & UBSan**: Clean build with zero leaks or invalid memory accesses across all 40 tests
+  - **ThreadSanitizer (TSan)**: Clean build verifying concurrent state is completely race-safe
+  - **PID Reuse Protection**: Tracks start time (jiffies since boot from `/proc/<pid>/stat`) to reject recycled PIDs
+  - **Stale Cgroup Cleanup**: Startup routine evacuates stranded PIDs to root cgroup and removes leftover slices
+  - **Crash-and-Restart Recovery**: Verified daemon recovers from sudden `kill -9` without hanging on stale locks
+  - **Async-Signal-Safe Handling**: Signal handler stores to atomic integer; teardown and I/O occur in normal thread context
+  - **Verification Script**: Automated audit script [`scripts/verify_hardening.sh`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/scripts/verify_hardening.sh)
+- [x] **Phase 11: Final Integration & Demonstration Workflow**
+  - 10-step end-to-end demo script ([`scripts/demo.sh`](file:///c:/Users/agrbr/OneDrive/Desktop/OS%20PROJ/scripts/demo.sh))
+  - Concise color-coded terminal output detailing every lifecycle phase
+  - Verified in both `--real` (active cgroup v2) and `--dry-run` modes
 
 ---
 
-## Building and Testing (Phase 1)
+## Quick Start & 10-Step Demo Workflow
+
+To run the complete 10-step demonstration workflow:
 
 ```bash
-# Configure and build all targets
+# Run the demo script (auto-detects real cgroups if root, or dry-run simulation)
+./scripts/demo.sh
+```
+
+### Demonstration Steps Shown:
+1. **Protector Startup**: Daemon acquires `/tmp/isp_demo.pid`, sweeps stale cgroups, and initializes `protector.slice`.
+2. **Background Workloads Starting**: High-contention background CPU worker is spawned.
+3. **Fake Call Starting**: `fake_call` begins 30 FPS stream holding `/dev/video10`.
+4. **Session Detection**: Procfs scan detects active video descriptor; state machine transitions to `ACTIVE`.
+5. **Classification**: Tree walking classifies `fake_call` as `PROTECTED`, worker as `BACKGROUND`, shell as `NORMAL`.
+6. **Cgroup Resource Shaping**: Background `cpu.weight` throttled to `20` + `IDLE` IO priority; `fake_call` boosted to `800`.
+7. **Frame Statistics**: `fake_call` logs 150 frames with 0 deadline misses (< 40ms deadline).
+8. **Session Termination**: Video descriptor closes; state machine enters `IN_HYSTERESIS`.
+9. **Hysteresis Period**: 4-second grace countdown ensures protection remains active against intermittent reconnects.
+10. **Restoration of Normal Resource Allocation**: Baseline weights (100) restored, processes returned to original cgroups, daemon shuts down with zero lingering state.
+
+---
+
+## Build and Test Suite
+
+### 1. Standard Build
+
+```bash
 cmake -B build -S .
 cmake --build build
 
-# Run unit tests
+# Run all 40 unit tests
 ./build/unit_tests
+```
 
-# Run protector daemon skeleton
-./build/protector --config config/protector.conf --dry-run
+### 2. AddressSanitizer & UndefinedBehaviorSanitizer (ASan/UBSan)
 
-# Run fake call benchmark skeleton
-./build/fake_call --device /dev/video10 --fps 30
+```bash
+cmake -B build_asan -S . -DENABLE_ASAN=ON
+cmake --build build_asan
+./build_asan/unit_tests
+```
+
+### 3. ThreadSanitizer (TSan)
+
+```bash
+cmake -B build_tsan -S . -DENABLE_TSAN=ON
+cmake --build build_tsan
+
+# Run with ASLR entropy adjustment (required on newer Linux / WSL2 kernels)
+setarch x86_64 -R ./build_tsan/unit_tests
+```
+
+### 4. Run Hardening & Safety Audit
+
+```bash
+./scripts/verify_hardening.sh
 ```
 
 ---
 
-## Environment Verification
+## Running Experiments & Data Analysis
 
-To verify that your environment meets all requirements:
+To reproduce the quantitative benchmark comparing **Mode A (Baseline)** vs **Mode B (Protected)**:
 
 ```bash
-bash scripts/verify_env.sh
+# Run full benchmark harness (fixed-size stress-ng, tar compression, dd I/O)
+./scripts/run_experiments.sh --duration 60 --repetitions 3 --dry-run
+
+# Run data analysis and generate comparison plots & tables
+./scripts/analyze_experiments.sh
 ```
 
-For full reproduction instructions, see [`docs/ENVIRONMENT_SETUP.md`](docs/ENVIRONMENT_SETUP.md).
+Results are generated in:
+- `results/plots/baseline_vs_protected_frame_drops.png`
+- `results/plots/baseline_vs_protected_p99_latency.png`
+- `results/analysis_summary_table.md`
+- `results/analysis_summary_table.csv`
+
+---
+
+## Troubleshooting Guide
+
+### 1. cgroup v2 Unified Hierarchy & Permissions
+- **Symptom**: `Failed to initialize cgroup hierarchy` or permission denied writing to `/sys/fs/cgroup`.
+- **Cause**: Linux requires root privileges (or delegated cgroup permissions) to create sub-slices and write `cpu.weight` / `cgroup.subtree_control`.
+- **Remedy**:
+  - For full active enforcement: Run with `sudo ./build/protector --real`
+  - For unprivileged environments: Use `--dry-run` (the safe default). In dry-run mode, the daemon executes all detection, classification, state machine transitions, and logs every cgroup write without modifying root system files.
+
+### 2. Missing Webcam Device (`/dev/video10`)
+- **Symptom**: `Failed to open webcam device /dev/video10`.
+- **Cause**: No physical webcam is attached or `v4l2loopback` is not loaded in WSL2.
+- **Remedy**:
+  - Load the loopback kernel module: `sudo modprobe v4l2loopback video_nr=10 card_label="VirtualWebcam"`
+  - Or use a dummy test file: `touch /tmp/dummy_video && chmod 0666 /tmp/dummy_video` and set `video_device = /tmp/dummy_video` in `config/protector.conf`. The demo script ([`scripts/demo.sh`](scripts/demo.sh)) and experiment runner ([`scripts/run_experiments.py`](scripts/run_experiments.py)) automate this fallback transparently.
+
+### 3. ThreadSanitizer: `FATAL: unexpected memory mapping`
+- **Symptom**: When running `./build_tsan/unit_tests`, TSan outputs `FATAL: ThreadSanitizer: unexpected memory mapping 0x5f...`.
+- **Cause**: Recent Linux kernels and Ubuntu 24.04 glibc employ Address Space Layout Randomization (ASLR) with high entropy (32-bit/28-bit VMA randomization), placing PIE binaries outside TSan's fixed shadow memory table.
+- **Remedy**:
+  - Run the TSan binary with ASLR disabled: `setarch x86_64 -R ./build_tsan/unit_tests`
+  - Or temporarily adjust the system entropy: `sudo sysctl vm.mmap_rnd_bits=28`
+
+### 4. Stale Cgroups After Daemon Crash or SIGKILL
+- **Symptom**: Cgroup hierarchy cannot be removed or error `Device or resource busy` on `rmdir`.
+- **Cause**: The previous daemon was abruptly terminated (`kill -9`) while processes were inside `protector.slice/background` or `protector.slice/protected`. In Linux cgroups v2, directories cannot be deleted if PIDs remain inside them.
+- **Remedy**:
+  - The protector daemon implements automatic **Stale Cgroup Cleanup** (`cleanup_stale_hierarchy()`) upon startup. It reads all `/sys/fs/cgroup/protector.slice/*/cgroup.procs`, writes each stranded PID back to `/sys/fs/cgroup/cgroup.procs`, and wipes the slice.
+  - Manual evacuation command if needed:
+    ```bash
+    for p in $(cat /sys/fs/cgroup/protector.slice/* /cgroup.procs 2>/dev/null); do
+        echo "$p" | sudo tee /sys/fs/cgroup/cgroup.procs >/dev/null
+    done
+    sudo rmdir /sys/fs/cgroup/protector.slice/* 2>/dev/null || true
+    sudo rmdir /sys/fs/cgroup/protector.slice 2>/dev/null || true
+    ```
+
+### 5. PID Reuse Detection
+- **Symptom**: Concern that a dead process PID might be reassigned by the kernel to a new unrelated process, causing erroneous throttling.
+- **Resolution**: Both `ProcTable` and `CgroupManager` record the process `start_time` (jiffies since system boot parsed from `/proc/<pid>/stat` field 22). When a PID is refreshed or restored, the current start time is compared against the recorded start time. If the start time differs, the entry is invalidated, preventing any misdirected cgroup operations.
+
+### 6. Pidfile Lock Contention (`/tmp/protector.pid`)
+- **Symptom**: `Another instance of protector daemon is already running (locked /tmp/protector.pid)`.
+- **Cause**: An active daemon is already holding the `flock` lock, or an orphaned process is still running.
+- **Remedy**:
+  - Verify if an instance is running: `ps aux | grep protector`
+  - Stop the running instance gracefully: `kill -15 $(cat /tmp/protector.pid)`
+  - If the previous instance crashed, `flock` locks are automatically released by the Linux kernel upon process death. A new daemon will seamlessly acquire the file and overwrite the PID.

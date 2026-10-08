@@ -31,6 +31,7 @@ public:
     // Initialization & teardown
     bool init_hierarchy();
     bool cleanup();
+    bool cleanup_stale_hierarchy();
 
     // Resource control setters
     bool set_cpu_weight(const std::string& group_name, uint32_t weight);
@@ -41,12 +42,17 @@ public:
     // Apply entire resource policy
     bool apply_policy(const ResourcePolicy& policy);
 
-    // Process migration & restoration
+    // Process migration & restoration (with PID reuse safety)
     bool move_process(pid_t pid,
                       const std::string& target_group,
                       const std::string& hint_original_cgroup = "");
     bool restore_process(pid_t pid);
     void restore_all();
+
+    // PID validation & lifecycle
+    static uint64_t get_process_starttime(pid_t pid, const std::string& proc_root = "/proc");
+    static bool is_process_alive(pid_t pid, const std::string& proc_root);
+    bool is_process_alive(pid_t pid) const;
 
     // Path resolution
     std::string get_slice_path() const;
@@ -70,13 +76,18 @@ public:
     // Read current cgroup for a pid from procfs
     std::string read_process_cgroup(pid_t pid) const;
 
+    struct TrackedProcess {
+        std::string original_cgroup;
+        uint64_t start_time{0};
+    };
+
 private:
     std::string cgroup_root_;
     bool dry_run_{true};
     std::string proc_root_;
 
     mutable std::mutex mutex_;
-    std::unordered_map<pid_t, std::string> original_cgroups_;
+    std::unordered_map<pid_t, TrackedProcess> original_cgroups_;
     std::vector<std::string> action_log_;
 
     // Internal filesystem helpers

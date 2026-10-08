@@ -14,6 +14,26 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# Sanitizer options
+option(ENABLE_ASAN "Enable AddressSanitizer (ASan) and UndefinedBehaviorSanitizer (UBSan)" OFF)
+option(ENABLE_TSAN "Enable ThreadSanitizer (TSan)" OFF)
+
+if (ENABLE_ASAN AND ENABLE_TSAN)
+    message(FATAL_ERROR "ENABLE_ASAN and ENABLE_TSAN are mutually exclusive.")
+endif()
+
+if (ENABLE_ASAN)
+    message(STATUS "Configuring build with AddressSanitizer and UndefinedBehaviorSanitizer")
+    add_compile_options(-fsanitize=address,undefined -fno-omit-frame-pointer -g)
+    add_link_options(-fsanitize=address,undefined)
+endif()
+
+if (ENABLE_TSAN)
+    message(STATUS "Configuring build with ThreadSanitizer")
+    add_compile_options(-fsanitize=thread -fno-omit-frame-pointer -g)
+    add_link_options(-fsanitize=thread)
+endif()
+
 # Include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -67,6 +87,7 @@ add_executable(unit_tests
     tests/test_resource_shaper.cpp
     tests/test_daemon.cpp
     tests/test_fake_call.cpp
+    tests/test_hardening.cpp
 )
 target_include_directories(unit_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/tests
