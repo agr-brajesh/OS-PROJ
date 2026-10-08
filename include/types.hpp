@@ -3,6 +3,7 @@
 #include <string>
 #include <chrono>
 #include <cstdint>
+#include <ostream>
 
 namespace isp {
 
@@ -22,6 +23,10 @@ inline const char* to_string(ProcessClass pc) {
     return "UNKNOWN";
 }
 
+inline std::ostream& operator<<(std::ostream& os, ProcessClass pc) {
+    return os << to_string(pc);
+}
+
 // State machine for session protector
 enum class SessionState {
     INACTIVE,       // No interactive session detected
@@ -36,6 +41,10 @@ inline const char* to_string(SessionState state) {
         case SessionState::IN_HYSTERESIS: return "IN_HYSTERESIS";
     }
     return "UNKNOWN";
+}
+
+inline std::ostream& operator<<(std::ostream& os, SessionState state) {
+    return os << to_string(state);
 }
 
 // Resource shaping policy configuration

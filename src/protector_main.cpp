@@ -2,6 +2,7 @@
 #include "logger.hpp"
 #include "types.hpp"
 #include "session_detector.hpp"
+#include "proc_table.hpp"
 
 #include <iostream>
 #include <string>
@@ -72,11 +73,23 @@ int main(int argc, char* argv[]) {
     ISP_LOG_INFO("  dry_run:      " << (policy.dry_run ? "true" : "false"));
     ISP_LOG_INFO("Interactive Session Protector skeleton initialized successfully.");
 
-    // Initial session detection check
-    auto session_pids = isp::findSessionPids(policy.proc_mount, policy.video_device);
-    ISP_LOG_INFO("Initial session detection scan found " << session_pids.size() << " active session process(es).");
-    for (pid_t pid : session_pids) {
-        ISP_LOG_INFO("  -> PID " << pid << " (" << isp::SessionDetector::get_process_name(pid, policy.proc_mount) << ")");
+    // Initial process table snapshot and classification
+    isp::ProcTable proc_table;
+    if (proc_table.refresh(policy.proc_mount, policy.video_device)) {
+        auto protected_procs = proc_table.get_by_class(isp::ProcessClass::PROTECTED);
+        auto background_procs = proc_table.get_by_class(isp::ProcessClass::BACKGROUND);
+        auto normal_procs = proc_table.get_by_class(isp::ProcessClass::NORMAL);
+
+        ISP_LOG_INFO("Process table refreshed (" << proc_table.size() << " total processes):");
+        ISP_LOG_INFO("  PROTECTED:  " << protected_procs.size());
+        for (const auto& p : protected_procs) {
+            ISP_LOG_INFO("    -> PID " << p.pid << " [" << p.comm << "]");
+        }
+        ISP_LOG_INFO("  BACKGROUND: " << background_procs.size());
+        for (const auto& p : background_procs) {
+            ISP_LOG_INFO("    -> PID " << p.pid << " [" << p.comm << "]");
+        }
+        ISP_LOG_INFO("  NORMAL:     " << normal_procs.size());
     }
 
     return 0;

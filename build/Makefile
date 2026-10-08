@@ -250,6 +250,30 @@ src/logger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/logger.cpp.s
 .PHONY : src/logger.cpp.s
 
+src/proc_table.o: src/proc_table.cpp.o
+.PHONY : src/proc_table.o
+
+# target to build an object file
+src/proc_table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/proc_table.cpp.o
+.PHONY : src/proc_table.cpp.o
+
+src/proc_table.i: src/proc_table.cpp.i
+.PHONY : src/proc_table.i
+
+# target to preprocess a source file
+src/proc_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/proc_table.cpp.i
+.PHONY : src/proc_table.cpp.i
+
+src/proc_table.s: src/proc_table.cpp.s
+.PHONY : src/proc_table.s
+
+# target to generate assembly for a file
+src/proc_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/proc_table.cpp.s
+.PHONY : src/proc_table.cpp.s
+
 src/protector_main.o: src/protector_main.cpp.o
 .PHONY : src/protector_main.o
 
@@ -346,6 +370,30 @@ tests/test_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_main.cpp.s
 .PHONY : tests/test_main.cpp.s
 
+tests/test_proc_table.o: tests/test_proc_table.cpp.o
+.PHONY : tests/test_proc_table.o
+
+# target to build an object file
+tests/test_proc_table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.o
+.PHONY : tests/test_proc_table.cpp.o
+
+tests/test_proc_table.i: tests/test_proc_table.cpp.i
+.PHONY : tests/test_proc_table.i
+
+# target to preprocess a source file
+tests/test_proc_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.i
+.PHONY : tests/test_proc_table.cpp.i
+
+tests/test_proc_table.s: tests/test_proc_table.cpp.s
+.PHONY : tests/test_proc_table.s
+
+# target to generate assembly for a file
+tests/test_proc_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.s
+.PHONY : tests/test_proc_table.cpp.s
+
 tests/test_session_detector.o: tests/test_session_detector.cpp.o
 .PHONY : tests/test_session_detector.o
 
@@ -392,6 +440,9 @@ help:
 	@echo "... src/logger.o"
 	@echo "... src/logger.i"
 	@echo "... src/logger.s"
+	@echo "... src/proc_table.o"
+	@echo "... src/proc_table.i"
+	@echo "... src/proc_table.s"
 	@echo "... src/protector_main.o"
 	@echo "... src/protector_main.i"
 	@echo "... src/protector_main.s"
@@ -404,6 +455,9 @@ help:
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"
+	@echo "... tests/test_proc_table.o"
+	@echo "... tests/test_proc_table.i"
+	@echo "... tests/test_proc_table.s"
 	@echo "... tests/test_session_detector.o"
 	@echo "... tests/test_session_detector.i"
 	@echo "... tests/test_session_detector.s"

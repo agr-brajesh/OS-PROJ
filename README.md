@@ -50,7 +50,12 @@ Protected Session (Low latency, zero frame drops)
   - Robust scanning of `/proc/<pid>/fd/*` symlinks
   - Graceful handling of disappeared processes & permission errors
   - Multi-process detection and metadata lookup (`comm`, `status`, `PPid`)
-- [ ] **Phase 3: Process Classification & Allowlist**
+- [x] **Phase 3: Process Classification & Allowlist**
+  - Mutex-protected `ProcTable` with safe process lifecycle tracking
+  - Parent/child tree walking (`get_ancestors`, `get_descendants`, `get_session_root`)
+  - Browser-style multi-process tree protection
+  - Three-class taxonomy (`PROTECTED`, `NORMAL`, `BACKGROUND`)
+  - Strict allowlist & never-touch policy enforcement
 - [ ] **Phase 4: Cgroups v2 Manager (Creation, Migration, Restoration)**
 - [ ] **Phase 5: Resource Shaper State Machine (Fairness & Aging)**
 - [ ] **Phase 6: Multi-Threaded Daemon Engine (Monitor + Shaper)**

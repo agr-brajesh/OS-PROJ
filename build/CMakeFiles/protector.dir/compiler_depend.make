@@ -4,6 +4,7 @@
 CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/src/protector_main.cpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/config.hpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/logger.hpp \
+  /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/session_detector.hpp \
   /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/types.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -347,8 +348,6 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/c++/13/bits/refwrap.h:
 
-/usr/include/c++/13/bits/stl_algobase.h:
-
 /usr/include/c++/13/bits/node_handle.h:
 
 /usr/include/c++/13/ios:
@@ -433,6 +432,18 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/c++/13/bits/chrono.h:
 
+/mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/session_detector.hpp:
+
+/usr/include/c++/13/bits/istream.tcc:
+
+/usr/include/c++/13/bits/exception_ptr.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+
+/usr/include/c++/13/bits/ptr_traits.h:
+
 /usr/include/c++/13/bits/ostream_insert.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
@@ -448,10 +459,6 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
 /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/include/logger.hpp:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/usr/include/c++/13/bits/exception_ptr.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
@@ -472,12 +479,6 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/c++/13/bits/charconv.h:
 
 /usr/include/c++/13/cstdio:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
-
-/usr/include/c++/13/bits/ptr_traits.h:
 
 /usr/include/c++/13/bits/localefwd.h:
 
@@ -510,6 +511,8 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/c++/13/new:
 
 /usr/include/c++/13/ext/alloc_traits.h:
+
+/usr/include/c++/13/bits/stl_algobase.h:
 
 /usr/include/c++/13/bits/allocator.h:
 
@@ -589,6 +592,12 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 
 /usr/include/errno.h:
 
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/locale.h:
+
+/usr/include/c++/13/ext/aligned_buffer.h:
+
 /usr/include/c++/13/cctype:
 
 /usr/include/c++/13/ext/atomicity.h:
@@ -650,9 +659,3 @@ CMakeFiles/protector.dir/src/protector_main.cpp.o: /mnt/c/Users/agrbr/OneDrive/D
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/linux/errno.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
-/usr/include/c++/13/ext/aligned_buffer.h:
-
-/usr/include/locale.h:

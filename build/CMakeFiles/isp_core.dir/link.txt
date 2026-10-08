@@ -1,2 +1,2 @@
-/usr/bin/ar qc libisp_core.a CMakeFiles/isp_core.dir/src/config.cpp.o CMakeFiles/isp_core.dir/src/logger.cpp.o CMakeFiles/isp_core.dir/src/session_detector.cpp.o
+/usr/bin/ar qc libisp_core.a CMakeFiles/isp_core.dir/src/config.cpp.o CMakeFiles/isp_core.dir/src/logger.cpp.o CMakeFiles/isp_core.dir/src/session_detector.cpp.o CMakeFiles/isp_core.dir/src/proc_table.cpp.o
 /usr/bin/ranlib libisp_core.a

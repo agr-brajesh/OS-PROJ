@@ -87,12 +87,12 @@ clean: CMakeFiles/unit_tests.dir/clean
 CMakeFiles/isp_core.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=3,4,5,6 "Built target isp_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=3,4,5,6,7 "Built target isp_core"
 .PHONY : CMakeFiles/isp_core.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/isp_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 4
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/isp_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 0
 .PHONY : CMakeFiles/isp_core.dir/rule
@@ -113,12 +113,12 @@ CMakeFiles/isp_core.dir/clean:
 CMakeFiles/protector.dir/all: CMakeFiles/isp_core.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/protector.dir/build.make CMakeFiles/protector.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/protector.dir/build.make CMakeFiles/protector.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=7,8 "Built target protector"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=8,9 "Built target protector"
 .PHONY : CMakeFiles/protector.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/protector.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 6
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/protector.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 0
 .PHONY : CMakeFiles/protector.dir/rule
@@ -144,7 +144,7 @@ CMakeFiles/fake_call.dir/all: CMakeFiles/isp_core.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/fake_call.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 6
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fake_call.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 0
 .PHONY : CMakeFiles/fake_call.dir/rule
@@ -165,12 +165,12 @@ CMakeFiles/fake_call.dir/clean:
 CMakeFiles/unit_tests.dir/all: CMakeFiles/isp_core.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=9,10,11,12 "Built target unit_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=10,11,12,13,14 "Built target unit_tests"
 .PHONY : CMakeFiles/unit_tests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/unit_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 8
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/unit_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" 0
 .PHONY : CMakeFiles/unit_tests.dir/rule
