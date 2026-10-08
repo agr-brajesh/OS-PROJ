@@ -250,6 +250,30 @@ src/fake_call_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fake_call.dir/build.make CMakeFiles/fake_call.dir/src/fake_call_main.cpp.s
 .PHONY : src/fake_call_main.cpp.s
 
+src/ioprio.o: src/ioprio.cpp.o
+.PHONY : src/ioprio.o
+
+# target to build an object file
+src/ioprio.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/ioprio.cpp.o
+.PHONY : src/ioprio.cpp.o
+
+src/ioprio.i: src/ioprio.cpp.i
+.PHONY : src/ioprio.i
+
+# target to preprocess a source file
+src/ioprio.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/ioprio.cpp.i
+.PHONY : src/ioprio.cpp.i
+
+src/ioprio.s: src/ioprio.cpp.s
+.PHONY : src/ioprio.s
+
+# target to generate assembly for a file
+src/ioprio.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/ioprio.cpp.s
+.PHONY : src/ioprio.cpp.s
+
 src/logger.o: src/logger.cpp.o
 .PHONY : src/logger.o
 
@@ -321,6 +345,30 @@ src/protector_main.s: src/protector_main.cpp.s
 src/protector_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/protector.dir/build.make CMakeFiles/protector.dir/src/protector_main.cpp.s
 .PHONY : src/protector_main.cpp.s
+
+src/resource_shaper.o: src/resource_shaper.cpp.o
+.PHONY : src/resource_shaper.o
+
+# target to build an object file
+src/resource_shaper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/resource_shaper.cpp.o
+.PHONY : src/resource_shaper.cpp.o
+
+src/resource_shaper.i: src/resource_shaper.cpp.i
+.PHONY : src/resource_shaper.i
+
+# target to preprocess a source file
+src/resource_shaper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/resource_shaper.cpp.i
+.PHONY : src/resource_shaper.cpp.i
+
+src/resource_shaper.s: src/resource_shaper.cpp.s
+.PHONY : src/resource_shaper.s
+
+# target to generate assembly for a file
+src/resource_shaper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/resource_shaper.cpp.s
+.PHONY : src/resource_shaper.cpp.s
 
 src/session_detector.o: src/session_detector.cpp.o
 .PHONY : src/session_detector.o
@@ -442,6 +490,30 @@ tests/test_proc_table.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.s
 .PHONY : tests/test_proc_table.cpp.s
 
+tests/test_resource_shaper.o: tests/test_resource_shaper.cpp.o
+.PHONY : tests/test_resource_shaper.o
+
+# target to build an object file
+tests/test_resource_shaper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_resource_shaper.cpp.o
+.PHONY : tests/test_resource_shaper.cpp.o
+
+tests/test_resource_shaper.i: tests/test_resource_shaper.cpp.i
+.PHONY : tests/test_resource_shaper.i
+
+# target to preprocess a source file
+tests/test_resource_shaper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_resource_shaper.cpp.i
+.PHONY : tests/test_resource_shaper.cpp.i
+
+tests/test_resource_shaper.s: tests/test_resource_shaper.cpp.s
+.PHONY : tests/test_resource_shaper.s
+
+# target to generate assembly for a file
+tests/test_resource_shaper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_resource_shaper.cpp.s
+.PHONY : tests/test_resource_shaper.cpp.s
+
 tests/test_session_detector.o: tests/test_session_detector.cpp.o
 .PHONY : tests/test_session_detector.o
 
@@ -488,6 +560,9 @@ help:
 	@echo "... src/fake_call_main.o"
 	@echo "... src/fake_call_main.i"
 	@echo "... src/fake_call_main.s"
+	@echo "... src/ioprio.o"
+	@echo "... src/ioprio.i"
+	@echo "... src/ioprio.s"
 	@echo "... src/logger.o"
 	@echo "... src/logger.i"
 	@echo "... src/logger.s"
@@ -497,6 +572,9 @@ help:
 	@echo "... src/protector_main.o"
 	@echo "... src/protector_main.i"
 	@echo "... src/protector_main.s"
+	@echo "... src/resource_shaper.o"
+	@echo "... src/resource_shaper.i"
+	@echo "... src/resource_shaper.s"
 	@echo "... src/session_detector.o"
 	@echo "... src/session_detector.i"
 	@echo "... src/session_detector.s"
@@ -512,6 +590,9 @@ help:
 	@echo "... tests/test_proc_table.o"
 	@echo "... tests/test_proc_table.i"
 	@echo "... tests/test_proc_table.s"
+	@echo "... tests/test_resource_shaper.o"
+	@echo "... tests/test_resource_shaper.i"
+	@echo "... tests/test_resource_shaper.s"
 	@echo "... tests/test_session_detector.o"
 	@echo "... tests/test_session_detector.i"
 	@echo "... tests/test_session_detector.s"

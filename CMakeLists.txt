@@ -26,6 +26,8 @@ add_library(isp_core STATIC
     src/session_detector.cpp
     src/proc_table.cpp
     src/cgroup_manager.cpp
+    src/ioprio.cpp
+    src/resource_shaper.cpp
 )
 
 target_include_directories(isp_core PUBLIC
@@ -60,6 +62,7 @@ add_executable(unit_tests
     tests/test_session_detector.cpp
     tests/test_proc_table.cpp
     tests/test_cgroup_manager.cpp
+    tests/test_resource_shaper.cpp
 )
 target_include_directories(unit_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/tests

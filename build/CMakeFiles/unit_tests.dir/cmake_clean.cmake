@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/test_proc_table.cpp.o.d"
+  "CMakeFiles/unit_tests.dir/tests/test_resource_shaper.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/test_resource_shaper.cpp.o.d"
   "CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.o.d"
   "unit_tests"

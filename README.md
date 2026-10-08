@@ -62,7 +62,14 @@ Protected Session (Low latency, zero frame drops)
   - PID migration tracking with original cgroup recording
   - Complete restoration of processes to original cgroups upon cleanup
   - Strict `--dry-run` default with transparent action audit logs
-- [ ] **Phase 5: Resource Shaper State Machine (Fairness & Aging)**
+- [x] **Phase 5: Resource Shaper State Machine (Fairness & Aging)**
+  - Three-state lifecycle (`INACTIVE`, `ACTIVE`, `IN_HYSTERESIS`)
+  - Starvation floor enforcement on background workloads
+  - Dynamic aging (+10 weight / 15s) with configurable ceiling cap
+  - Hysteresis cancellation on transient reconnects
+  - Full restoration upon hysteresis expiration
+  - Injectable `MockClock` enabling instantaneous, sleep-free unit testing
+  - Linux `ioprio_set` support (IDLE vs. Best Effort)
 - [ ] **Phase 6: Multi-Threaded Daemon Engine (Monitor + Shaper)**
 - [ ] **Phase 7: Fake Video Call Benchmark App (30 FPS metric collector)**
 - [ ] **Phase 8: Benchmarking & Quantitative Evaluation Suite**
