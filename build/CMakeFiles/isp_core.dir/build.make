@@ -97,19 +97,35 @@ CMakeFiles/isp_core.dir/src/logger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/isp_core.dir/src/logger.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/logger.cpp" -o CMakeFiles/isp_core.dir/src/logger.cpp.s
 
+CMakeFiles/isp_core.dir/src/session_detector.cpp.o: CMakeFiles/isp_core.dir/flags.make
+CMakeFiles/isp_core.dir/src/session_detector.cpp.o: /mnt/c/Users/agrbr/OneDrive/Desktop/OS\ PROJ/src/session_detector.cpp
+CMakeFiles/isp_core.dir/src/session_detector.cpp.o: CMakeFiles/isp_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/isp_core.dir/src/session_detector.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/isp_core.dir/src/session_detector.cpp.o -MF CMakeFiles/isp_core.dir/src/session_detector.cpp.o.d -o CMakeFiles/isp_core.dir/src/session_detector.cpp.o -c "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/session_detector.cpp"
+
+CMakeFiles/isp_core.dir/src/session_detector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/isp_core.dir/src/session_detector.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/session_detector.cpp" > CMakeFiles/isp_core.dir/src/session_detector.cpp.i
+
+CMakeFiles/isp_core.dir/src/session_detector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/isp_core.dir/src/session_detector.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/src/session_detector.cpp" -o CMakeFiles/isp_core.dir/src/session_detector.cpp.s
+
 # Object files for target isp_core
 isp_core_OBJECTS = \
 "CMakeFiles/isp_core.dir/src/config.cpp.o" \
-"CMakeFiles/isp_core.dir/src/logger.cpp.o"
+"CMakeFiles/isp_core.dir/src/logger.cpp.o" \
+"CMakeFiles/isp_core.dir/src/session_detector.cpp.o"
 
 # External object files for target isp_core
 isp_core_EXTERNAL_OBJECTS =
 
 libisp_core.a: CMakeFiles/isp_core.dir/src/config.cpp.o
 libisp_core.a: CMakeFiles/isp_core.dir/src/logger.cpp.o
+libisp_core.a: CMakeFiles/isp_core.dir/src/session_detector.cpp.o
 libisp_core.a: CMakeFiles/isp_core.dir/build.make
 libisp_core.a: CMakeFiles/isp_core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libisp_core.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libisp_core.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/isp_core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/isp_core.dir/link.txt --verbose=$(VERBOSE)
 

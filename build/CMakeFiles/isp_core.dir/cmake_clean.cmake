@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/isp_core.dir/src/config.cpp.o.d"
   "CMakeFiles/isp_core.dir/src/logger.cpp.o"
   "CMakeFiles/isp_core.dir/src/logger.cpp.o.d"
+  "CMakeFiles/isp_core.dir/src/session_detector.cpp.o"
+  "CMakeFiles/isp_core.dir/src/session_detector.cpp.o.d"
   "libisp_core.a"
   "libisp_core.pdb"
 )

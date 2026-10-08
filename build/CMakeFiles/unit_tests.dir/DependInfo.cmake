@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/tests/test_config.cpp" "CMakeFiles/unit_tests.dir/tests/test_config.cpp.o" "gcc" "CMakeFiles/unit_tests.dir/tests/test_config.cpp.o.d"
   "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/tests/test_main.cpp" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o" "gcc" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o.d"
+  "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/tests/test_session_detector.cpp" "CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.o" "gcc" "CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

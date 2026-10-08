@@ -23,6 +23,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_library(isp_core STATIC
     src/config.cpp
     src/logger.cpp
+    src/session_detector.cpp
 )
 
 target_include_directories(isp_core PUBLIC
@@ -54,6 +55,7 @@ target_link_libraries(fake_call PRIVATE isp_core)
 add_executable(unit_tests
     tests/test_main.cpp
     tests/test_config.cpp
+    tests/test_session_detector.cpp
 )
 target_include_directories(unit_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/tests

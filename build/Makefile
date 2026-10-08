@@ -274,6 +274,30 @@ src/protector_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/protector.dir/build.make CMakeFiles/protector.dir/src/protector_main.cpp.s
 .PHONY : src/protector_main.cpp.s
 
+src/session_detector.o: src/session_detector.cpp.o
+.PHONY : src/session_detector.o
+
+# target to build an object file
+src/session_detector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/session_detector.cpp.o
+.PHONY : src/session_detector.cpp.o
+
+src/session_detector.i: src/session_detector.cpp.i
+.PHONY : src/session_detector.i
+
+# target to preprocess a source file
+src/session_detector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/session_detector.cpp.i
+.PHONY : src/session_detector.cpp.i
+
+src/session_detector.s: src/session_detector.cpp.s
+.PHONY : src/session_detector.s
+
+# target to generate assembly for a file
+src/session_detector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/session_detector.cpp.s
+.PHONY : src/session_detector.cpp.s
+
 tests/test_config.o: tests/test_config.cpp.o
 .PHONY : tests/test_config.o
 
@@ -322,6 +346,30 @@ tests/test_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_main.cpp.s
 .PHONY : tests/test_main.cpp.s
 
+tests/test_session_detector.o: tests/test_session_detector.cpp.o
+.PHONY : tests/test_session_detector.o
+
+# target to build an object file
+tests/test_session_detector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.o
+.PHONY : tests/test_session_detector.cpp.o
+
+tests/test_session_detector.i: tests/test_session_detector.cpp.i
+.PHONY : tests/test_session_detector.i
+
+# target to preprocess a source file
+tests/test_session_detector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.i
+.PHONY : tests/test_session_detector.cpp.i
+
+tests/test_session_detector.s: tests/test_session_detector.cpp.s
+.PHONY : tests/test_session_detector.s
+
+# target to generate assembly for a file
+tests/test_session_detector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_session_detector.cpp.s
+.PHONY : tests/test_session_detector.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -347,12 +395,18 @@ help:
 	@echo "... src/protector_main.o"
 	@echo "... src/protector_main.i"
 	@echo "... src/protector_main.s"
+	@echo "... src/session_detector.o"
+	@echo "... src/session_detector.i"
+	@echo "... src/session_detector.s"
 	@echo "... tests/test_config.o"
 	@echo "... tests/test_config.i"
 	@echo "... tests/test_config.s"
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"
+	@echo "... tests/test_session_detector.o"
+	@echo "... tests/test_session_detector.i"
+	@echo "... tests/test_session_detector.s"
 .PHONY : help
 
 

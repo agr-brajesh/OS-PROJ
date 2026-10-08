@@ -1,6 +1,7 @@
 #include "config.hpp"
 #include "logger.hpp"
 #include "types.hpp"
+#include "session_detector.hpp"
 
 #include <iostream>
 #include <string>
@@ -70,6 +71,13 @@ int main(int argc, char* argv[]) {
     ISP_LOG_INFO("  hysteresis:   " << policy.hysteresis_delay_sec << "s");
     ISP_LOG_INFO("  dry_run:      " << (policy.dry_run ? "true" : "false"));
     ISP_LOG_INFO("Interactive Session Protector skeleton initialized successfully.");
+
+    // Initial session detection check
+    auto session_pids = isp::findSessionPids(policy.proc_mount, policy.video_device);
+    ISP_LOG_INFO("Initial session detection scan found " << session_pids.size() << " active session process(es).");
+    for (pid_t pid : session_pids) {
+        ISP_LOG_INFO("  -> PID " << pid << " (" << isp::SessionDetector::get_process_name(pid, policy.proc_mount) << ")");
+    }
 
     return 0;
 }

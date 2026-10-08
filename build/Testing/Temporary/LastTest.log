@@ -1,13 +1,13 @@
-Start testing: Oct 08 18:57 UTC
+Start testing: Oct 08 19:02 UTC
 ----------------------------------------------------------
 1/1 Testing: ConfigUnitTests
 1/1 Test: ConfigUnitTests
 Command: "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/unit_tests"
 Directory: /mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build
-"ConfigUnitTests" start time: Oct 08 18:57 UTC
+"ConfigUnitTests" start time: Oct 08 19:02 UTC
 Output:
 ----------------------------------------------------------
-[1;34m=== Running Unit Tests (7 tests) ===[0m
+[1;34m=== Running Unit Tests (12 tests) ===[0m
 
   [ RUN      ] Config_BasicKeyValueParsing
   [0;32m[       OK ][0m Config_BasicKeyValueParsing
@@ -22,19 +22,29 @@ Output:
   [ RUN      ] Config_ToResourcePolicy
   [0;32m[       OK ][0m Config_ToResourcePolicy
   [ RUN      ] Config_LoadFromFile
-[33m[2026-10-08 18:57:17.628] [WARN ] [config.cpp:68] [0mUnable to open config file: non_existent_file_xyz.conf
+[33m[2026-10-08 19:02:39.559] [WARN ] [config.cpp:68] [0mUnable to open config file: non_existent_file_xyz.conf
   [0;32m[       OK ][0m Config_LoadFromFile
+  [ RUN      ] SessionDetector_DetectHoldingVideo10
+  [0;32m[       OK ][0m SessionDetector_DetectHoldingVideo10
+  [ RUN      ] SessionDetector_IgnoreProcessWithoutVideoDevice
+  [0;32m[       OK ][0m SessionDetector_IgnoreProcessWithoutVideoDevice
+  [ RUN      ] SessionDetector_MultipleProcessesMixed
+  [0;32m[       OK ][0m SessionDetector_MultipleProcessesMixed
+  [ RUN      ] SessionDetector_DisappearedProcessHandledSafely
+  [0;32m[       OK ][0m SessionDetector_DisappearedProcessHandledSafely
+  [ RUN      ] SessionDetector_NonExistentAndEmptyProcRoot
+  [0;32m[       OK ][0m SessionDetector_NonExistentAndEmptyProcRoot
 
 [1m=== Test Summary ===[0m
-  Total:  7
-  [0;32mPassed: 7[0m
+  Total:  12
+  [0;32mPassed: 12[0m
   [0;32mAll tests passed successfully![0m
 <end of output>
 Test time =   0.03 sec
 ----------------------------------------------------------
 Test Passed.
-"ConfigUnitTests" end time: Oct 08 18:57 UTC
+"ConfigUnitTests" end time: Oct 08 19:02 UTC
 "ConfigUnitTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 08 18:57 UTC
+End testing: Oct 08 19:02 UTC

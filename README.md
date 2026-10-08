@@ -45,7 +45,11 @@ Protected Session (Low latency, zero frame drops)
   - CMake C++17 build with `-Wall -Wextra -Wpedantic`
   - Targets: `protector`, `fake_call`, `unit_tests`
   - Zero-dependency key=value configuration parser
-- [ ] **Phase 2: Session Detection (`/dev/video*` procfs scanner)**
+- [x] **Phase 2: Session Detection (`/dev/video*` procfs scanner)**
+  - Injectable `procRoot` support for testing
+  - Robust scanning of `/proc/<pid>/fd/*` symlinks
+  - Graceful handling of disappeared processes & permission errors
+  - Multi-process detection and metadata lookup (`comm`, `status`, `PPid`)
 - [ ] **Phase 3: Process Classification & Allowlist**
 - [ ] **Phase 4: Cgroups v2 Manager (Creation, Migration, Restoration)**
 - [ ] **Phase 5: Resource Shaper State Machine (Fairness & Aging)**
