@@ -226,6 +226,30 @@ src/config.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/config.cpp.s
 .PHONY : src/config.cpp.s
 
+src/daemon.o: src/daemon.cpp.o
+.PHONY : src/daemon.o
+
+# target to build an object file
+src/daemon.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/daemon.cpp.o
+.PHONY : src/daemon.cpp.o
+
+src/daemon.i: src/daemon.cpp.i
+.PHONY : src/daemon.i
+
+# target to preprocess a source file
+src/daemon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/daemon.cpp.i
+.PHONY : src/daemon.cpp.i
+
+src/daemon.s: src/daemon.cpp.s
+.PHONY : src/daemon.s
+
+# target to generate assembly for a file
+src/daemon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/isp_core.dir/build.make CMakeFiles/isp_core.dir/src/daemon.cpp.s
+.PHONY : src/daemon.cpp.s
+
 src/fake_call_main.o: src/fake_call_main.cpp.o
 .PHONY : src/fake_call_main.o
 
@@ -442,6 +466,30 @@ tests/test_config.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_config.cpp.s
 .PHONY : tests/test_config.cpp.s
 
+tests/test_daemon.o: tests/test_daemon.cpp.o
+.PHONY : tests/test_daemon.o
+
+# target to build an object file
+tests/test_daemon.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_daemon.cpp.o
+.PHONY : tests/test_daemon.cpp.o
+
+tests/test_daemon.i: tests/test_daemon.cpp.i
+.PHONY : tests/test_daemon.i
+
+# target to preprocess a source file
+tests/test_daemon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_daemon.cpp.i
+.PHONY : tests/test_daemon.cpp.i
+
+tests/test_daemon.s: tests/test_daemon.cpp.s
+.PHONY : tests/test_daemon.s
+
+# target to generate assembly for a file
+tests/test_daemon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/test_daemon.cpp.s
+.PHONY : tests/test_daemon.cpp.s
+
 tests/test_main.o: tests/test_main.cpp.o
 .PHONY : tests/test_main.o
 
@@ -557,6 +605,9 @@ help:
 	@echo "... src/config.o"
 	@echo "... src/config.i"
 	@echo "... src/config.s"
+	@echo "... src/daemon.o"
+	@echo "... src/daemon.i"
+	@echo "... src/daemon.s"
 	@echo "... src/fake_call_main.o"
 	@echo "... src/fake_call_main.i"
 	@echo "... src/fake_call_main.s"
@@ -584,6 +635,9 @@ help:
 	@echo "... tests/test_config.o"
 	@echo "... tests/test_config.i"
 	@echo "... tests/test_config.s"
+	@echo "... tests/test_daemon.o"
+	@echo "... tests/test_daemon.i"
+	@echo "... tests/test_daemon.s"
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"

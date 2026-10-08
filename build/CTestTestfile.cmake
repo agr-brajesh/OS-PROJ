@@ -5,4 +5,4 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 add_test(ConfigUnitTests "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/build/unit_tests")
-set_tests_properties(ConfigUnitTests PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/CMakeLists.txt;74;add_test;/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/CMakeLists.txt;0;")
+set_tests_properties(ConfigUnitTests PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/CMakeLists.txt;76;add_test;/mnt/c/Users/agrbr/OneDrive/Desktop/OS PROJ/CMakeLists.txt;0;")

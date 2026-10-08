@@ -70,7 +70,13 @@ Protected Session (Low latency, zero frame drops)
   - Full restoration upon hysteresis expiration
   - Injectable `MockClock` enabling instantaneous, sleep-free unit testing
   - Linux `ioprio_set` support (IDLE vs. Best Effort)
-- [ ] **Phase 6: Multi-Threaded Daemon Engine (Monitor + Shaper)**
+- [x] **Phase 6: Multi-Threaded Daemon Engine (Monitor + Shaper)**
+  - Dual-thread daemon (`monitor_thread` + `shaper_thread`)
+  - Condition variable thread communication with atomic state synchronization
+  - Robust PID file locking (`flock`)
+  - POSIX signal handling (`SIGINT`, `SIGTERM`, `SIGHUP`)
+  - Graceful lifecycle teardown and total cgroup process restoration
+  - Validated end-to-end with concurrent `fake_call` and `stress-ng`
 - [ ] **Phase 7: Fake Video Call Benchmark App (30 FPS metric collector)**
 - [ ] **Phase 8: Benchmarking & Quantitative Evaluation Suite**
 - [ ] **Phase 9: Hardening, Sanitizers & Final Documentation**

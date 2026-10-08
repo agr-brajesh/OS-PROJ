@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/isp_core.dir/src/cgroup_manager.cpp.o.d"
   "CMakeFiles/isp_core.dir/src/config.cpp.o"
   "CMakeFiles/isp_core.dir/src/config.cpp.o.d"
+  "CMakeFiles/isp_core.dir/src/daemon.cpp.o"
+  "CMakeFiles/isp_core.dir/src/daemon.cpp.o.d"
   "CMakeFiles/isp_core.dir/src/ioprio.cpp.o"
   "CMakeFiles/isp_core.dir/src/ioprio.cpp.o.d"
   "CMakeFiles/isp_core.dir/src/logger.cpp.o"
